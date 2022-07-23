@@ -15,57 +15,34 @@
 <zk xmlns:n="native" xmlns:w="client">
     <hlayout viewModel="@id('vm') @init('com.example.zktraining.controller.HomeController')"
              width="100%">
-        <!--        <div sclass="container mt-5 ml-5">-->
-        <!--            <label value="@load(vm.title)"/>-->
-        <!--        </div>-->
-        <div class="alert alert-secondary mt-5">
-            <label value="@load(vm.title)"/>
-        </div>
-        <textbox value="@bind(vm.title)"></textbox>
-        <button onClick="@command('changeTitle')" label="change title"/>
-
-
         <div sclass="container mt-5">
-<!--            <grid >-->
-<!--                <auxhead>-->
-<!--                    <auxheader colspan="4" label="Danh Sach Học Sinh dùng foreach"/>-->
-<!--                </auxhead>-->
-<!--                <columns>-->
-<!--                    <column hflex="5">Họ Tên</column>-->
-<!--                    <column hflex="6">Nơi Ở</column>-->
-<!--                </columns>-->
-<!--                <rows sclass="narrow">-->
-<!--                    <forEach items="@load(vm.studentList)" var="item">-->
-<!--                        <row>-->
-<!--                            <label value="@load(item.name)"/>-->
-<!--                            <label value="${item.address}"/>-->
-<!--                        </row>-->
-<!--                    </forEach>-->
-<!--                </rows>-->
-<!--            </grid>-->
-            <grid model="@load(vm.studentList)" mold="paging" pageSize="100">
+            <grid id="grid"
+                  model="@load(vm.listNeView)">
                 <columns>
-                    <column hflex="5">Họ Tên</column>
-                    <column hflex="6">Nơi Ở</column>
-                    <column ></column>
+                    <column hflex="1" align="left" >
+                        <checkbox checked="@load(vm.checkAll)" onCheck="@command('onCheckTable')" />
+                    </column>
+                    <column hflex="2" label="No" align="left" />
+                    <column hflex="3" label="Name" align="center" />
                 </columns>
-                <template name="model" var="item">
-                    <row onClick="@command('editStudent', item = item)">
-                        <label value="@load(item.name)"/>
-                        <label value="${item.address}"/>
-                        <label value="xóa" onClick="@command('confirmDelete', item = item)"/>
+                <template name="model">
+                    <row>
+                        <cell >
+                            <checkbox checked="@load(each.checked)" onCheck="@command('onCheckTable', item = each)"/>
+                        </cell>
+                        <cell >
+                            <label value="@load(each.id)" />
+                        </cell>
+                        <cell >
+                            <label value="@load(each.name)"/>
+                        </cell>
+
                     </row>
                 </template>
             </grid>
-            <label value="name"/>
-            <textbox value="@bind(vm.student.name)"></textbox>
-            <label value="address"/>
-            <textbox value="@bind(vm.student.address)"></textbox>
-            <button onClick="@command('saveStudent')" label="save"/>
-            <button onClick="@command('changeName')" label="Test change name"/>
-            <button onClick="@command('changeName')" label="Test change name"/>
-            <button onClick="@command('openFormAddNew')" label="open form inserts"/>
-
+            <paging totalSize="@load(vm.totalSize)" pageSize="@load(vm.activeSize)"
+                    activePage="@load(vm.activePage)"
+                    onPaging="@command('unitPaging',event=event)"/>
         </div>
     </hlayout>
 </zk>

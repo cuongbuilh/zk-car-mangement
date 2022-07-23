@@ -6,5 +6,7 @@
 	<listener>
 		<listener-class>org.zkoss.zkmax.au.websocket.WebSocketWebAppInit</listener-class>
 	</listener>
-
+	<system-config>
+		<id-generator-class>com.example.zktraining.config.SimpleIdGenerator</id-generator-class>
+	</system-config>
 </zk>
