@@ -11,6 +11,7 @@ import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
@@ -104,6 +105,11 @@ public class CarController {
 
     public List<CarDTO> getCars() {
         return page.getContent();
+    }
+
+    @Command
+    public void add(){
+        Executions.sendRedirect("/add.zul");
     }
 
 }

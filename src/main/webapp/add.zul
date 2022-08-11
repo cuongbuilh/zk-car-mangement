@@ -1,0 +1,25 @@
+<zk>
+    <window viewModel="@id('vm') @init('com.example.zktraining.controller.AddCarController')" closable="true">
+        <button onClick="@command('back')">back</button>
+
+        <form>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </form>
+
+        <label value="name"/>
+        <label value="manufacturer"/>
+        <label value="style"/>
+        <label value="price"/>
+        <label value="engine"/>
+        <label value="assembly"/>
+        <label value="color"/>
+        <label value="available"/>
+    </window>
+</zk>
