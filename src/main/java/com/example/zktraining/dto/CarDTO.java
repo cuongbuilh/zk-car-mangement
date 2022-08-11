@@ -19,4 +19,5 @@ public class CarDTO implements Serializable {
     private String assembly;
     private String color;
     private boolean available;
+    private boolean checked = false;
 }

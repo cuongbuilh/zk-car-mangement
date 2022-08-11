@@ -3,6 +3,8 @@ package com.example.zktraining.repo;
 import com.example.zktraining.dto.CarDTO;
 import com.example.zktraining.dto.client.CarSearchDTO;
 import com.example.zktraining.entity.Car;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,5 +27,5 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
             "and (:#{#search.assembly} is null or c.assembly like %:#{#search.manufacturer}%) " +
             "and (:#{#search.color} is null or c.color like %:#{#search.manufacturer}%) " +
             "and (:#{#search.available} is null or c.available = :#{#search.available}) ")
-    List<Car> search(@Param("search") CarSearchDTO search);
+    Page<Car> search(@Param("search") CarSearchDTO search, Pageable pageable);
 }

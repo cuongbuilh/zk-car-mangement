@@ -15,4 +15,6 @@ public class CarSearchDTO {
     private String assembly;
     private String color;
     private Boolean available;
+    private int page = 0;
+    private int size = 100;
 }

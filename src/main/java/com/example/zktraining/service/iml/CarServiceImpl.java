@@ -7,7 +7,8 @@ import com.example.zktraining.mapper.BaseMapper;
 import com.example.zktraining.repo.CarRepository;
 import com.example.zktraining.service.CarService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,13 +19,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
-    private final BaseMapper<Car, CarDTO> carMapper = new BaseMapper<>();
+    private final BaseMapper<Car, CarDTO> carMapper = new BaseMapper<>(Car.class, CarDTO.class);
 
     @Override
-    public List<CarDTO> search(CarSearchDTO search) {
-        if (search == null)
-            return carMapper.toDtoBean(carRepository.findAll());
-        return carMapper.toDtoBean(carRepository.search(search));
+    public Page<CarDTO> search(CarSearchDTO search) {
+        PageRequest pageRequest = PageRequest.of(search.getPage(), search.getSize());
+        return carRepository.search(search, pageRequest).map(carMapper::toDtoBean);
     }
 
     @Override
