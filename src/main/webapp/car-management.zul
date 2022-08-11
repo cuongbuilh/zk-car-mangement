@@ -1,3 +1,32 @@
 <zk>
-
+    <window>
+    <style src="resource/css/car-management.css" />
+        <hlayout>
+            <listbox vflex="true" hflex="1" model="@load(new ArrayList())">
+                <auxhead>
+                    <auxheader colspan="4" class="topic">Car Management</auxheader>
+                </auxhead>
+                <listhead>
+                    <listheader>id</listheader>
+                    <listheader>name</listheader>
+                    <listheader>manufacturer</listheader>
+                    <listheader>color</listheader>
+                    <listheader>price</listheader>
+                    <listheader>available</listheader>
+                    <listheader>function</listheader>
+                </listhead>
+                <template name="model" var="car">
+                    <listitem>
+                        <listcell label="@load(car.id)" />
+                        <listcell label="@load(car.name)" />
+                        <listcell label="@load(car.manufacturer)" />
+                        <listcell label="@load(car.color)" />
+                        <listcell label="@load(car.price)" />
+                        <listcell label="@load(car.available)" />
+                        <listcell> a </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </hlayout>
+    </window>
 </zk>

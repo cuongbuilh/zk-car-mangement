@@ -7,6 +7,7 @@ import com.example.zktraining.mapper.BaseMapper;
 import com.example.zktraining.repo.CarRepository;
 import com.example.zktraining.service.CarService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
-    private final BaseMapper<Car, CarDTO> carMapper;
+    private final BaseMapper<Car, CarDTO> carMapper = new BaseMapper<>();
 
     @Override
     public List<CarDTO> search(CarSearchDTO search) {

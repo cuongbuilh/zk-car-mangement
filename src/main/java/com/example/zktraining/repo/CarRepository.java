@@ -25,5 +25,5 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
             "and (:#{#search.assembly} is null or c.assembly like %:#{#search.manufacturer}%) " +
             "and (:#{#search.color} is null or c.color like %:#{#search.manufacturer}%) " +
             "and (:#{#search.available} is null or c.available = :#{#search.available}) ")
-    List<Car> search(@Param("car") CarSearchDTO search);
+    List<Car> search(@Param("search") CarSearchDTO search);
 }
