@@ -7,8 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NeDTO {
+public class CarDTO {
     private Integer id;
+    private String company;
     private String name;
-    private boolean checked;
+    private String category;
+    private Double price;
+    private String cubic;
+    private String whereProduction;
+    private String color;
+    private String status;
 }
