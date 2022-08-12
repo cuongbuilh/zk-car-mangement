@@ -1,0 +1,62 @@
+<zk>
+    <hlayout viewModel="@id('vm') @init('com.example.zktraining.controller.CarController')"
+             width="100%">
+        <div sclass="container mt-5">
+            <button label="Add" onClick="@command('redirect')"></button>
+            <grid id="grid"
+                  model="@load(vm.listCar)">
+                <columns>
+                    <column hflex="1" align="center">
+                        <checkbox checked="@load(vm.checkAll)" onCheck="@command('onCheckAll')"/>
+                    </column>
+                    <column hflex="2" label="No" align="center"/>
+                    <column hflex="2" label="Name" align="center"/>
+                    <column hflex="2" label="price" align="center"/>
+                    <column hflex="2" label="color" align="center"/>
+                    <column hflex="2" label="model" align="center"/>
+                    <column hflex="2" label="manufacture" align="center"/>
+                    <column hflex="2" label="brand" align="center"/>
+                    <column hflex="2" label="status" align="center"/>
+                    <column hflex="2" label="action" align="center"/>
+
+
+                </columns>
+                <template name="model">
+                    <row>
+                        <cell>
+                            <checkbox checked="@load(each.checked)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.id)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.name)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.price)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.color)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.model)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.manufacture)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.brand)"/>
+                        </cell>
+                        <cell>
+                            <label value="@load(each.status)"/>
+                        </cell>
+                        <cell>
+                            <button label="Edit" onClick="@command()"></button>
+                        </cell>
+                    </row>
+                </template>
+            </grid>
+        </div>
+        <window></window>
+    </hlayout>
+</zk>
