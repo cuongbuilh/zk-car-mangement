@@ -51,13 +51,13 @@
                         <listcell label="@load(each.price)"/>
                         <listcell label="@load(each.available)"/>
                         <listcell>
-                            <button onClick="@command('delete', id=each.id)">
+                            <button onClick="@command('delete', id=each.id)" sclass="btn btn-danger">
                                 delete
                             </button>
-                            <button>
+                            <button sclass="btn btn-info">
                                 view
                             </button>
-                            <button>
+                            <button sclass="btn btn-success">
                                 edit
                             </button>
                         </listcell>

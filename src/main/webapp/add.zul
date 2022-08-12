@@ -1,25 +1,69 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<?link rel="icon" type="image/jpeg" sizes="16x16" href="/favicon"?>
+<?link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"?>
+<?link rel="stylesheet" href="/resources/css/zk-bootstrap.css" ?>
+
+
+<!--
+<?link rel="stylesheet" href="/resources/css/themes/theme2/zk-admin-bootstrap-custom-theme.css"?>
+<?link rel="stylesheet" href="/resources/css/themes/theme2/custom-theme.css" ?>
+<?link rel="stylesheet" href="/resources/css/themes/theme2/layout.css" ?>
+ -->
+<!--<?link rel="stylesheet" href="/resources/css/themes/theme2/h-layout.css" ?>-->
+<?link rel="stylesheet" type="text/css" href="/resources/css/font-icons.css"?>
+<?link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" ?>
 <zk>
     <window viewModel="@id('vm') @init('com.example.zktraining.controller.AddCarController')" closable="true">
         <button onClick="@command('back')">back</button>
+        <button onClick="@command('createCar')" sclass="btn btn-success">add</button>
+        <grid>
+            <rows>
+                <row align="left">
+                    <label value="name" width="10%"/>
+                    <textbox width="60%" value="@bind(vm.car.name)"/>
+                </row>
+                <row>
+                    <label value="manufacturer"/>
+                    <combobox id="cmbManufacturer" width="60%"
+                              model="@load(vm.manufacturerList)"
+                              selectedItem="@bind(vm.car.manufacturer)">
+                        <template name="model">
+                            <comboitem label="@load(each)" value="@load(each)"/>
+                        </template>
+                    </combobox>
+                </row>
+                <row>
+                    <label value="style"/>
+                    <textbox width="60%" value="@bind(vm.car.style)"/>
+                </row>
+                <row>
+                    <label value="price"/>
+                    <longbox width="60%" value="@bind(vm.car.price)" format=",###"/>
+                </row>
+                <row>
+                    <label value="engine"/>
+                    <longbox width="60%" value="@bind(vm.car.engine)" format=",###"/>
+                </row>
+                <row>
+                    <label value="assembly"/>
+                    <combobox id="cmbAssembly" width="60%"
+                              model="@load(vm.assemblyList)"
+                              selectedItem="@bind(vm.car.assembly)">
+                        <template name="model">
+                            <comboitem label="@load(each)" value="@load(each)"/>
+                        </template>
+                    </combobox>
+                </row>
+                <row>
+                    <label value="color"/>
+                    <textbox width="60%" value="@bind(vm.car.color)"/>
+                </row>
+                <row>
+                    <label value="available"/>
+                    <checkbox mold="switch" width="60%" checked="@bind(vm.car.available)"/>
 
-        <form>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </form>
-
-        <label value="name"/>
-        <label value="manufacturer"/>
-        <label value="style"/>
-        <label value="price"/>
-        <label value="engine"/>
-        <label value="assembly"/>
-        <label value="color"/>
-        <label value="available"/>
+                </row>
+            </rows>
+        </grid>
     </window>
 </zk>

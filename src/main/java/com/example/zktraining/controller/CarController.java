@@ -5,6 +5,7 @@ import com.example.zktraining.dto.client.CarSearchDTO;
 import com.example.zktraining.service.CarService;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.zkoss.bind.BindUtils;
@@ -20,6 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @VariableResolver(DelegatingVariableResolver.class)
+@Slf4j
 public class CarController {
     @WireVariable
     private CarService carService;
@@ -56,7 +58,7 @@ public class CarController {
             page = carService.search(carSearchDTO);
             BindUtils.postNotifyChange(null, null, this, "cars");
         }else {
-            System.out.println("delete failed");
+            log.error("delete faild");
         }
     }
 
@@ -79,6 +81,7 @@ public class CarController {
 
     @Command
     public void onCheckAll(@BindingParam("item") CarDTO item) {
+        log.info(" check all");
         if (Objects.isNull(item)) {
             checkAll = !checkAll;
             BindUtils.postNotifyChange(null, null, this, "checkAll");
@@ -109,7 +112,7 @@ public class CarController {
 
     @Command
     public void add(){
-        Executions.sendRedirect("/add.zul");
+        Executions.sendRedirect("/car-form.zul");
     }
 
 }
