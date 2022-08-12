@@ -1,0 +1,39 @@
+<vlayout width="300px">
+    <label value="${car.name}" style="font-size: 14px; font-weight: bold;"/>
+    <grid>
+        <rows>
+            <row>
+                name:
+                <label value="${car.name}"/>
+            </row>
+            <row>
+                manufacturer:
+                <label value="${car.manufacturer}"/>
+            </row>
+            <row>
+                style:
+                <label value="${car.style}"/>
+            </row>
+            <row>
+                price:
+                <label value="${car.price}"/>
+            </row>
+            <row>
+                engine:
+                <label value="${car.engine}"/>
+            </row>
+            <row>
+                assembly:
+                <label value="${car.assembly}"/>
+            </row>
+            <row>
+                color:
+                <label value="${car.color}"/>
+            </row>
+            <row>
+                available:
+                <label value="${car.available}"/>
+            </row>
+        </rows>
+    </grid>
+</vlayout>

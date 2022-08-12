@@ -40,7 +40,7 @@
                     <listheader align="left" hflex="3">function</listheader>
                 </listhead>
                 <template name="model" var="each">
-                    <listitem>
+                    <listitem  popup="detail_${each.id}, position=after_pointer" style="cursor:pointer">
                         <listcell>
                             <checkbox checked="@load(each.checked)" onClick="@command('onCheckAll', item = each)"/>
                         </listcell>
@@ -54,12 +54,17 @@
                             <button onClick="@command('delete', id=each.id)" sclass="btn btn-danger">
                                 delete
                             </button>
-                            <button sclass="btn btn-info">
-                                view
-                            </button>
+
                             <button sclass="btn btn-success">
                                 edit
                             </button>
+                        </listcell>
+                        <listcell>
+                            <label value="${each.name}" />
+                            <popup id="detail_${each.id}">
+                                <include src="/car-detail.zul"
+                                         car="${each}" />
+                            </popup>
                         </listcell>
                     </listitem>
                 </template>
