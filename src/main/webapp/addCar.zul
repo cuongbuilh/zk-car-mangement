@@ -1,31 +1,36 @@
 <window id="modalDialog" title="Coffee Order" border="normal" width="460px"
         apply="com.example.zktraining.controller.AddCarController"
         position="center,center" closable="true"
-        action="show: slideDown;hide: slideUp">
+        action="show: slideDown;hide: slideUp" form="@id('fx') @save(vm.car)">
     <vlayout>
         <grid>
-            <columns>
-                <column hflex="1" label="Name" />
-                <column hflex="2" label="Coffee Type" align="center" />
-                <column hflex="1" label="Quantity" align="center" />
-            </columns>
             <rows>
                 <row>
-                    <label value="Evan" />
-                    <label value="Java" />
-                    <label value="2" />
+                    <label value="name"/>
+                    <textbox value="@bind(fx.name)"/>
                 </row>
                 <row>
-                    <label value="Billy" />
-                    <label value="Latte" />
-                    <label value="3" />
+                    <label value="price"/>
+                    <textbox value="@bind(fx.price)"/>
                 </row>
                 <row>
-                    <label value="Roger" />
-                    <label value="Americano" />
-                    <label value="6" />
+                    <label value="color"/>
+                    <textbox value="@bind(fx.color)"/>
+                </row>
+                <row>
+                    <label value="manufacture"/>
+                    <textbox value="@bind(fx.manufacture)"/>
+                </row>
+                <row>
+                    <label value="brand"/>
+                    <textbox value="@bind(fx.brand)"/>
+                </row>
+                <row>
+                    <label value="status"/>
+                    <textbox value="@bind(fx.status)"/>
                 </row>
             </rows>
+
         </grid>
         <button id="closeBtn" hflex="1" label="close"/>
     </vlayout>
