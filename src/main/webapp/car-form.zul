@@ -23,13 +23,14 @@
             <rows>
                 <row align="left">
                     <label value="name" width="10%"/>
-                    <textbox width="60%" value="@bind(vm.car.name)"/>
+                    <textbox width="60%" value="@bind(vm.car.name)" constraint="no empty: {Sorry, no empty allowed}"/>
                 </row>
                 <row>
                     <label value="manufacturer"/>
                     <combobox id="cmbManufacturer" width="60%"
                               model="@load(vm.manufacturerList)"
-                              selectedItem="@bind(vm.car.manufacturer)">
+                              selectedItem="@bind(vm.car.manufacturer)"
+                              constraint="no empty: {Sorry, no empty allowed}">
                         <template name="model">
                             <comboitem label="@load(each)" value="@load(each)"/>
                         </template>
@@ -37,21 +38,25 @@
                 </row>
                 <row>
                     <label value="style"/>
-                    <textbox width="60%" value="@bind(vm.car.style)"/>
+                    <textbox width="60%" value="@bind(vm.car.style)"
+                             constraint="no empty: {Sorry, no empty allowed}"/>
                 </row>
                 <row>
                     <label value="price"/>
-                    <longbox width="60%" value="@bind(vm.car.price)" format=",###"/>
+                    <longbox width="60%" value="@bind(vm.car.price)" format=",###"
+                             constraint="no empty: {Sorry, no empty allowed}"/>
                 </row>
                 <row>
                     <label value="engine"/>
-                    <longbox width="60%" value="@bind(vm.car.engine)" format=",###"/>
+                    <longbox width="60%" value="@bind(vm.car.engine)" format=",###"
+                             constraint="no empty: {Sorry, no empty allowed}"/>
                 </row>
                 <row>
                     <label value="assembly"/>
                     <combobox id="cmbAssembly" width="60%"
                               model="@load(vm.assemblyList)"
-                              selectedItem="@bind(vm.car.assembly)">
+                              selectedItem="@bind(vm.car.assembly)"
+                              constraint="no empty: {Sorry, no empty allowed}">
                         <template name="model">
                             <comboitem label="@load(each)" value="@load(each)"/>
                         </template>
@@ -59,7 +64,7 @@
                 </row>
                 <row>
                     <label value="color"/>
-                    <textbox width="60%" value="@bind(vm.car.color)"/>
+                    <textbox width="60%" value="@bind(vm.car.color)" constraint="no empty: {Sorry, no empty allowed}" />
                 </row>
                 <row>
                     <label value="available"/>
@@ -69,6 +74,6 @@
             </rows>
 
         </grid>
-        <button onClick="@command('createCar')" sclass="btn btn-success" label="add"  width="100%" />
+        <button onClick="@command('createCar')" sclass="btn btn-success" label="@bind(vm.title)" width="100%"/>
     </window>
 </zk>

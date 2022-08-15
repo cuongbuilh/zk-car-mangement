@@ -52,6 +52,7 @@ public class CarController extends SelectorComposer<Component> {
     public void edit(@BindingParam("car") CarDTO car) {
         Map<String, Object> args = new HashMap<>();
         args.put("car", car);
+        args.put("title", "update");
 
         log.info("args in parent: {}", args);
         Window window = (Window)Executions.createComponents(

@@ -50,6 +50,10 @@ public class AddCarController {
     @WireVariable
     private CarService carService;
 
+    @Getter
+    @Setter
+    private String title;
+
 
 
     @Init
@@ -61,6 +65,12 @@ public class AddCarController {
             car = (CarDTO) arg.get("car");
         }else {
             car = new CarDTO();
+        }
+
+        if (Objects.nonNull(arg) && arg.containsKey("title")){
+            title = (String) arg.get("title");
+        }else {
+            title = "create";
         }
 
         manufacturerList.add("BMW");
