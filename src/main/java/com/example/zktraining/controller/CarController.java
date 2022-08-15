@@ -27,13 +27,20 @@ import java.util.stream.Collectors;
 @VariableResolver(DelegatingVariableResolver.class)
 @Slf4j
 @RequiredArgsConstructor
-public class CarController extends SelectorComposer<Component> {
+public class CarController  {
     @WireVariable
     private CarService carService;
 
     Set<Integer> selectedIds = new HashSet<>();
     Page<CarDTO> page;
+
+    @Getter
+            @Setter
     CarSearchDTO carSearchDTO;
+
+    @Getter
+    @Setter
+    private int pageSize;
 
     @Getter
     @Setter
@@ -42,6 +49,10 @@ public class CarController extends SelectorComposer<Component> {
     @Getter
     @Setter
     boolean checkAll = false;
+
+    @Getter
+    @Setter
+    List<Integer> sizeList = new ArrayList<>();
 
     @Command
     public void create() {
@@ -115,7 +126,13 @@ public class CarController extends SelectorComposer<Component> {
     public void init() {
         carSearchDTO = new CarSearchDTO();
         page = carService.search(carSearchDTO);
+        pageSize = 1;
 
+        sizeList.add(1);
+        sizeList.add(2);
+        sizeList.add(4);
+        sizeList.add(5);
+        sizeList.add(10);
     }
 
     public List<CarDTO> getCars() {
