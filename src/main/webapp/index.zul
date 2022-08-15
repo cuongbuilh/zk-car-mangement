@@ -1,10 +1,13 @@
 
-<zk>
+<zk >
 <window
         viewModel="@id('vm') @init('com.example.zktraining.controller.HomeController')">
-    <button href="form.zul" label="Add"/>
-    <listbox model="@load(vm.listCarView)" rows="2" style="margin-top: 10px">
+    <button onClick="@command('addCar')" label="Add"/>
+    <listbox model="@load(vm.listCarView)" rows="2" style="margin-top: 10px; height: 500px">
         <listhead>
+            <listheader  >
+                    <checkbox />
+            </listheader>
             <listheader  label="Hãng xe"  />
             <listheader label="Tên xe"/>
             <listheader label="Chủng loại"  />
@@ -13,11 +16,13 @@
             <listheader label="Nơi sản xuất"  />
             <listheader  label="Màu sắc"  />
             <listheader label="Tình trạng còn hàng" />
-            <listheader label="Hành động"  />
+            <listheader width="20%" label="Hành động"  />
         </listhead>
-        <template name="model">
-            <listitem>
-
+        <template name="model"  >
+            <listitem >
+                <listcell>
+                    <checkbox />
+                </listcell>
                 <listcell  label="@bind(each.company)"/>
                 <listcell label="@bind(each.name)"/>
                 <listcell label="@bind(each.category)"/>
@@ -27,9 +32,9 @@
                 <listcell label="@bind(each.color)"/>
                 <listcell label="@bind(each.status )"/>
                 <listcell>
-                    <button onClick="@command('updateCar', item= each)"  label="Update"/>
-                    <button label="Detail"/>
-                    <button  onClick="@command('deleteCar', id= each.id)"  label="Delete"/>
+                        <button onClick="@command('addCar', item= each)"  label="Update"/>
+                        <button label="Detail"/>
+                        <button  onClick="@command('deleteCar', id= each.id)"  label="Delete"/>
                 </listcell>
             </listitem>
         </template>

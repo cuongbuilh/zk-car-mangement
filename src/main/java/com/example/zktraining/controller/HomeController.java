@@ -10,6 +10,8 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import java.util.*;
 
@@ -46,51 +48,33 @@ public class HomeController {
 
 
     @Command
-    public void updateCar(@BindingParam("item") CarDTO carDTO){
-        Map<String, CarDTO > dataMap = new HashMap<>();
+    public  void addCar(@BindingParam("item") CarDTO carDTO){
+        Map<String, CarDTO> dataMap = new HashMap<>();
         dataMap.put("carDTO", carDTO);
-         Executions.createComponents("form.zul", null, dataMap);
+        Window window = (Window) Executions.createComponents("form.zul", null, dataMap);
+        window.doModal();
     }
 
-    @Command
-    public void deleteCar(@BindingParam("id") Integer id){
-                    carService.deleteCar(id);
-                    listCarView = carService.getListCar();
-                BindUtils.postNotifyChange(null, null, this, "listCarView");
-            }
-
-
+//    @Command
+//    public void updateCar(@BindingParam("item") CarDTO carDTO){
+//        Map<String, CarDTO > dataMap = new HashMap<>();
+//        dataMap.put("carDTO", carDTO);
+//         Executions.createComponents("form.zul", null, dataMap);
+//    }
+//
+//    @Command
+//    public void deleteCar(@BindingParam("id") Integer id){
+//
+//                    carService.deleteCar(id);
+//                    listCarView = carService.getListCar();
+//                BindUtils.postNotifyChange(null, null, this, "listCarView");
+//            }
+//
+//
 //    private void initDataView() {
 //        listNeView = new ArrayList<>(listNe.subList(activePage, activeSize));
 //    }
-
-//    @Command
-//    @NotifyChange({"listNeView", "activeSize", "activePage"})
-//    public void unitPaging(@BindingParam("event") PagingEvent event) {
-//        this.activeSize = event.getPageable().getPageSize();
-//        this.activePage = event.getActivePage();
-////        int min = activePage * activeSize;
-////        int max = min + activeSize;
-////        if (max > totalSize) {
-////            max = totalSize;
-////        }
-////        listNeView = new ArrayList<>(listNe.subList(min, max));
-//        DataResponseDTO dataResponseDTO = neService.getListNe(activePage, activeSize);
-//        listNeView =  dataResponseDTO.getListNe();
-//        totalSize = dataResponseDTO.getTotalNe();
-//        listNeView.forEach(item -> {
-//            if (checkAllHis){
-//                if (listNeNoChecked.contains(item.getId())){
-//                    item.setChecked(false);
-//                }else {
-//                    item.setChecked(checkAllHis);
-//                }
-//            }else if (listNeChecked.contains(item.getId())){
-//                item.setChecked(true);
-//            }
 //
-//        });
-//    }
 //
 //    @Command
 //    public void onCheckTable(@BindingParam("item") NeDTO item) {

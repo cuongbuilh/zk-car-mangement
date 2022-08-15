@@ -1,86 +1,58 @@
 <zk>
-    <window  viewModel="@id('vm') @init('com.example.zktraining.controller.FormController')" closable="true">
+    <window  viewModel="@id('vm') @init('com.example.zktraining.controller.FormController')" closable="true" title="Add Car" action="show: slideDown;hide: slideUp">
+        <grid >
+            <rows>
 
-        <div class="row">
-            <div>
-                <label value="Hãng xe"/>
-            </div>
-            <div >
-                <combobox model="@load(vm.companys)" value="@bind(vm.carDTO.company) @save(vm.carDTO.company,after='saveCar')" >
-                    <comboitem label="@load(each)"  />
-                </combobox>
-            </div>
-        </div>
+                <row>
+                    <label value="Hãng xe"/>
+                    <combobox model="@load(vm.companys)" value="@bind(vm.carDTO.company) @save(vm.carDTO.company,after='saveCar')" >
+                        <comboitem label="@load(each)"  />
+                    </combobox>
+                </row>
+                <row>
+                    <label value="Tên xe"/>
+                    <textbox value="@load(vm.carDTO.name) @save(vm.carDTO.name, after='saveCar')" ></textbox>
+                </row>
+                <row>
+                    <label value="Loại xe"/>
+                    <combobox model="@load(vm.categorys)"   value="@bind(vm.carDTO.category) @save(vm.carDTO.category,after='saveCar')">
+                        <comboitem label="@load(each)" />
+                    </combobox>
+                </row>
+                <row>
+                    <label value="Giá bán"/>
+                    <decimalbox value="@bind(vm.carDTO.price) @save(vm.carDTO.price,after='saveCar')"/>
+                </row>
+                <row>
+                    <label value="Phân khối"/>
+                    <textbox value="@bind(vm.carDTO.cubic) @save(vm.carDTO.cubic,after='saveCar')" ></textbox>
+                </row>
+                <row>
+                    <label value="Nơi sản xuất"/>
+                    <combobox model="@load(vm.whereProductions)"  value="@bind(vm.carDTO.whereProduction) @save(vm.carDTO.whereProduction,after='saveCar')"   >
+                        <comboitem label="@load(each)" value="value1" />
+                    </combobox>
+                </row>
+                <row>
+                    <label value="Màu sắc"/>
+                    <textbox value="@bind(vm.carDTO.color) @save(vm.carDTO.color,after='saveCar')"></textbox>
+                </row>
+                <row>
+                    <label value="Tình trạng còn hàng"/>
+                    <textbox value="@bind(vm.carDTO.status) @save(vm.carDTO.status,after='saveCar')" ></textbox>
+                </row>
+                <row>
+                    <button onClick="@command('saveCar')" label="save"/>
+                    <button onClick="@command('closeForm')" label="cancel"/>
+                </row>
 
-        <div class="row  ">
-            <div>
-                <label value="Tên xe"/>
-            </div>
-            <div>
-                <textbox value="@load(vm.carDTO.name) @save(vm.carDTO.name, after='saveCar')" ></textbox>
-            </div>
-        </div>
+            </rows>
 
-        <div class="row ">
-            <div>
-                <label value="Loại xe"/>
-            </div>
-            <div>
-                <combobox model="@load(vm.categorys)"   value="@bind(vm.carDTO.category) @save(vm.carDTO.category,after='saveCar')">
-                    <comboitem label="@load(each)" />
-                </combobox>
-            </div>
-        </div>
 
-        <div class="row ">
-            <div>
-                <label value="Giá bán"/>
-            </div>
-            <div>
-                <decimalbox value="@bind(vm.carDTO.price) @save(vm.carDTO.price,after='saveCar')"/>
-            </div>
-        </div>
+        </grid>
 
-        <div class="row ">
-            <div>
-                <label value="Phân khối"/>
-            </div>
-            <div>
-                <textbox value="@bind(vm.carDTO.cubic) @save(vm.carDTO.cubic,after='saveCar')" ></textbox>
-            </div>
-        </div>
-        <div class="row ">
-            <div>
 
-                <label value="Nơi sản xuất"/>
-            </div>
-            <div>
-                <combobox model="@load(vm.whereProductions)"  value="@bind(vm.carDTO.whereProduction) @save(vm.carDTO.whereProduction,after='saveCar')"   >
-                    <comboitem label="@load(each)" value="value1" />
-                </combobox>
-            </div>
 
-        </div>
-        <div class="row ">
-            <div>
-
-                <label value="Màu sắc"/>
-            </div>
-            <div>
-                <textbox value="@bind(vm.carDTO.color) @save(vm.carDTO.color,after='saveCar')"></textbox>
-            </div>
-        </div>
-        <div class="row">
-            <div>
-                <label value="Tình trạng còn hàng"/>
-            </div>
-            <div>
-                <textbox value="@bind(vm.carDTO.status) @save(vm.carDTO.status,after='saveCar')" ></textbox>
-            </div>
-        </div>
-
-    <button onClick="@command('saveCar')" label="save"/>
-    <button href="/" label="cancel"/>
 
 
 
