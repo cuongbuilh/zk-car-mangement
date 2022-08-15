@@ -13,9 +13,12 @@
 <?link rel="stylesheet" type="text/css" href="/resources/css/font-icons.css"?>
 <?link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" ?>
 <zk>
-    <window viewModel="@id('vm') @init('com.example.zktraining.controller.AddCarController')" closable="true">
-        <button onClick="@command('back')">back</button>
-        <button onClick="@command('createCar')" sclass="btn btn-success">add</button>
+    <window viewModel="@id('vm') @init('com.example.zktraining.controller.AddCarController')" closable="true"
+            width="40%" height="80%"
+            id="modalDialog" title="Car Manager" border="normal"
+            position="center,center"
+            action="show: slideDown;hide: slideUp">
+
         <grid>
             <rows>
                 <row align="left">
@@ -64,6 +67,8 @@
 
                 </row>
             </rows>
+
         </grid>
+        <button onClick="@command('createCar')" sclass="btn btn-success" label="add"  width="100%" />
     </window>
 </zk>

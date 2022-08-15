@@ -23,7 +23,7 @@
                         <span>Car Management</span>
                         <div>
                             <button sclass="btn btn-danger" onClick="@command('deleteAll')">deleteAll</button>
-                            <button sclass="btn btn-success" onClick="@command('add')">add</button>
+                            <button sclass="btn btn-success" onClick="@command('add')" autodisable="self">add</button>
                         </div>
                     </auxheader>
                 </auxhead>
@@ -40,7 +40,7 @@
                     <listheader align="left" hflex="3">function</listheader>
                 </listhead>
                 <template name="model" var="each">
-                    <listitem  popup="detail_${each.id}, position=after_pointer" style="cursor:pointer">
+                    <listitem popup="detail_${each.id}, position=after_pointer" style="cursor:pointer">
                         <listcell>
                             <checkbox checked="@load(each.checked)" onClick="@command('onCheckAll', item = each)"/>
                         </listcell>
@@ -55,15 +55,14 @@
                                 delete
                             </button>
 
-                            <button sclass="btn btn-success">
-                                edit
-                            </button>
+                            <button sclass="btn btn-success" label="edit" onClick="@command('edit', car=each)"/>
+
                         </listcell>
                         <listcell>
-                            <label value="${each.name}" />
+                            <label value="${each.name}"/>
                             <popup id="detail_${each.id}">
                                 <include src="/car-detail.zul"
-                                         car="${each}" />
+                                         car="${each}"/>
                             </popup>
                         </listcell>
                     </listitem>

@@ -4,6 +4,7 @@ import com.example.zktraining.dto.CarDTO;
 import com.example.zktraining.dto.client.CarSearchDTO;
 import com.example.zktraining.service.CarService;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -12,17 +13,21 @@ import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
+import org.zkoss.zul.Window;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @VariableResolver(DelegatingVariableResolver.class)
 @Slf4j
-public class CarController {
+@RequiredArgsConstructor
+public class CarController extends SelectorComposer<Component> {
     @WireVariable
     private CarService carService;
 
@@ -44,8 +49,14 @@ public class CarController {
     }
 
     @Command
-    public void update() {
-        System.out.println("updateCar");
+    public void edit(@BindingParam("car") CarDTO car) {
+        Map<String, Object> args = new HashMap<>();
+        args.put("car", car);
+
+        log.info("args in parent: {}", args);
+        Window window = (Window)Executions.createComponents(
+                "/car-form.zul", null, args);
+        window.doModal();
     }
 
     @Command
@@ -112,7 +123,10 @@ public class CarController {
 
     @Command
     public void add(){
-        Executions.sendRedirect("/car-form.zul");
+        //create a window programmatically and use it as a modal dialog.
+        Window window = (Window)Executions.createComponents(
+                "/car-form.zul", null, null);
+        window.doModal();
     }
 
 }
