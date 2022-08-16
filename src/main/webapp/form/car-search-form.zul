@@ -1,0 +1,75 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<?link rel="icon" type="image/jpeg" sizes="16x16" href="/favicon"?>
+<?link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"?>
+<?link rel="stylesheet" href="/resources/css/zk-bootstrap.css" ?>
+
+
+<!--
+<?link rel="stylesheet" href="/resources/css/themes/theme2/zk-admin-bootstrap-custom-theme.css"?>
+<?link rel="stylesheet" href="/resources/css/themes/theme2/custom-theme.css" ?>
+<?link rel="stylesheet" href="/resources/css/themes/theme2/layout.css" ?>
+ -->
+<!--<?link rel="stylesheet" href="/resources/css/themes/theme2/h-layout.css" ?>-->
+<?link rel="stylesheet" type="text/css" href="/resources/css/font-icons.css"?>
+<?link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" ?>
+<zk>
+    <window viewModel="@id('vm') @init('com.example.zktraining.controller.car.SearchCarController')" closable="true"
+            width="400px" height="60%"
+            id="searchDialog" title="Search" border="normal"
+            position="left,center"
+            action="show: slideDown;hide: slideUp">
+
+        <grid>
+            <columns>
+                <column hflex="1"/>
+                <column hflex="3"/>
+            </columns>
+
+            <rows>
+                <row>
+                    <label value="id:" width="10px"/>
+
+                    <longbox value="@bind(vm.search.id)" width="200px"/>
+                </row>
+                <row>
+                    <label value="name:" width="10px"/>
+                    <textbox value="@bind(vm.search.name)" width="200px"/>
+                </row>
+                <row>
+                    <label value="manufacturer:" width="10px"/>
+                    <textbox value="@bind(vm.search.manufacturer)" width="200px"/>
+                </row>
+                <row>
+                    <label value="style:" width="10px"/>
+                    <textbox  value="@bind(vm.search.style)" width="200px"/>
+                </row>
+                <row>
+                    <label value="price:" width="10px"/>
+                    <div width="200px">
+                        <longbox  value="@bind(vm.search.priceFrom)" width="45%"/>
+                        -
+                        <longbox  value="@bind(vm.search.priceTo)" width="45%"/>
+                    </div>
+                </row>
+                <row>
+                    <label value="engine:" width="10px"/>
+                    <div width="200px">
+                        <longbox  value="@bind(vm.search.engineFrom)" width="45%"/>
+                        -
+                        <longbox  value="@bind(vm.search.engineTo)" width="45%"/>
+                    </div>
+                </row>
+                <row>
+                    <label value="color:" width="10px"/>
+                    <textbox  value="@bind(vm.search.color)" width="200px"/>
+                </row>
+                <row>
+                    <label value="available:" width="10px"/>
+                    <checkbox mold="switch"  checked="@bind(vm.search.available)" width="200px"/>
+                </row>
+            </rows>
+
+        </grid>
+        <button onClick="@global-command('search', search=vm.search), @command('close', window=searchDialog)" sclass="btn btn-success" label="search" width="100%"/>
+    </window>
+</zk>

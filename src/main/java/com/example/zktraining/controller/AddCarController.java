@@ -87,17 +87,13 @@ public class AddCarController {
 
     }
 
-    @Command
-    public void back() {
-        Executions.sendRedirect("/");
-    }
 
     @Command
     public void createCar() {
         log.info("createCar {}", car);
         if (carService.addCar(car)) {
             Toast.show("car was created", "info", null, 0, true);
-            Executions.sendRedirect("/");
+
         } else {
             log.error("createCar error");
             Toast.show("error, try again!", "error", null, 0, true);

@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.annotation.BindingParam;
-import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -116,8 +114,18 @@ public class CarController {
     }
 
     @Command
-    public void search() {
-        System.out.println("search");
+    public void handleSearchClick() {
+        Map<String, Object> args = new HashMap<>();
+        args.put("search", carSearchDTO);
+        Window window = (Window) Executions.createComponents(
+                "/form/car-search-form.zul", null, args);
+        window.doModal();
+    }
+
+    @GlobalCommand
+    @NotifyChange("cars")
+    public void search(@BindingParam("search") CarSearchDTO searchDTO){
+        page = carService.search(searchDTO);
     }
 
 
@@ -146,7 +154,7 @@ public class CarController {
     public void init() {
         carSearchDTO = new CarSearchDTO();
         page = carService.search(carSearchDTO);
-        pageSize = 1;
+        pageSize = 2;
 
         sizeList.add(1);
         sizeList.add(2);
@@ -167,6 +175,13 @@ public class CarController {
         window.doModal();
 
 
+    }
+
+    @Command
+    @NotifyChange("cars")
+    public void clear(){
+        carSearchDTO = new CarSearchDTO();
+        page = carService.search(carSearchDTO);
     }
 
 

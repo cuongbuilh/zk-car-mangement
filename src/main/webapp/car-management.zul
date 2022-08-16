@@ -24,7 +24,9 @@
                         <div>
                             <button sclass="btn btn-danger" onClick="@command('deleteAll')">deleteAll</button>
                             <button sclass="btn btn-success" onClick="@command('add')" autodisable="self">add</button>
-                            <button sclass="btn btn-warning" label="Search"/>
+                            <button sclass="btn btn-warning" onClick="@command('handleSearchClick')" label="Search"/>
+                            <button sclass="btn btn-success" onClick="@command('clear')" label="Clear"/>
+
                             <label value="size" />
                             <combobox id="a" width="10%"
                                       model="@load(vm.sizeList)"
