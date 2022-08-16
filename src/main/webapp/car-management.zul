@@ -37,9 +37,9 @@
                         </div>
                     </auxheader>
                 </auxhead>
-                <listhead>
+                <listhead >
                     <listheader align="center" hflex="1">
-                        <checkbox checked="@load(checkAll)" onCheck="@command('onCheckAll',)"/>
+                        <checkbox checked="@load(vm.checkAll)" onCheck="@command('onCheckAll',)"/>
                     </listheader>
                     <listheader align="center" hflex="1">id</listheader>
                     <listheader align="left" hflex="3">name</listheader>

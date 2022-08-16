@@ -15,27 +15,30 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @VariableResolver(DelegatingVariableResolver.class)
 @Slf4j
 @RequiredArgsConstructor
-public class CarController  {
+public class CarController {
     @WireVariable
     private CarService carService;
 
-    Set<Integer> selectedIds = new HashSet<>();
     Page<CarDTO> page;
 
     @Getter
-            @Setter
+    @Setter
     CarSearchDTO carSearchDTO;
 
     @Getter
@@ -66,7 +69,7 @@ public class CarController  {
         args.put("title", "update");
 
         log.info("args in parent: {}", args);
-        Window window = (Window)Executions.createComponents(
+        Window window = (Window) Executions.createComponents(
                 "/car-form.zul", null, args);
         window.doModal();
     }
@@ -77,23 +80,39 @@ public class CarController  {
                 .filter(CarDTO::isChecked)
                 .map(CarDTO::getId)
                 .collect(Collectors.toList());
-        if (carService.deleteCars(deletedIds)) {
-            page = carService.search(carSearchDTO);
-            BindUtils.postNotifyChange(null, null, this, "cars");
-        }else {
-            log.error("delete faild");
-        }
+
+        Messagebox.show("Do you want to delete ids: " + deletedIds, "", Messagebox.OK | Messagebox.NO, Messagebox.EXCLAMATION, new EventListener<Event>() {
+            @Override
+            public void onEvent(final Event event) throws Exception {
+                if (Messagebox.ON_YES.equals(event.getName())) {
+                    if (carService.deleteCars(deletedIds)) {
+                        page = carService.search(carSearchDTO);
+                        BindUtils.postNotifyChange(null, null, this, "cars");
+                    } else {
+                        log.error("delete faild");
+                    }
+                }
+            }
+        });
+
+
     }
 
     @Command
     public void delete(@BindingParam("id") int id) {
-        System.out.println("deleteCar: " + id);
-        if (carService.deleteCars(Arrays.asList(id))) {
-            page = carService.search(carSearchDTO);
-            BindUtils.postNotifyChange(null, null, this, "cars");
-        } else {
-            System.out.println("deleteCar: error");
-        }
+        Messagebox.show("Do you want to delete id: " + id, "", Messagebox.OK | Messagebox.NO, Messagebox.EXCLAMATION, new EventListener<Event>() {
+            @Override
+            public void onEvent(final Event event) throws Exception {
+                if (Messagebox.ON_YES.equals(event.getName())) {
+                    if (carService.deleteCars(Arrays.asList(id))) {
+                        page = carService.search(carSearchDTO);
+                        BindUtils.postNotifyChange(null, null, this, "cars");
+                    } else {
+                        System.out.println("deleteCar: error");
+                    }
+                }
+            }
+        });
     }
 
     @Command
@@ -104,10 +123,9 @@ public class CarController  {
 
     @Command
     public void onCheckAll(@BindingParam("item") CarDTO item) {
-        log.info(" check all");
         if (Objects.isNull(item)) {
             checkAll = !checkAll;
-            BindUtils.postNotifyChange(null, null, this, "checkAll");
+
 
             getCars().forEach(car -> {
                 car.setChecked(checkAll);
@@ -115,10 +133,12 @@ public class CarController  {
             });
         } else {
             item.setChecked(!item.isChecked());
-            BindUtils.postNotifyChange(null, null, item, "checked");
+            BindUtils.postNotifyChange(item, "checked");
+            log.info("check all: {}", getCars().stream().allMatch(CarDTO::isChecked));
+            checkAll = getCars().stream().allMatch(CarDTO::isChecked);
+            log.info("check all-2: {}", checkAll);
         }
-
-        System.out.println(getCars().stream().map(CarDTO::isChecked).collect(Collectors.toList()));
+        BindUtils.postNotifyChange(null, null, this, "checkAll");
     }
 
 
@@ -140,11 +160,14 @@ public class CarController  {
     }
 
     @Command
-    public void add(){
+    public void add() {
         //create a window programmatically and use it as a modal dialog.
-        Window window = (Window)Executions.createComponents(
+        Window window = (Window) Executions.createComponents(
                 "/car-form.zul", null, null);
         window.doModal();
+
+
     }
+
 
 }
