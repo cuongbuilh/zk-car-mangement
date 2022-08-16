@@ -1,59 +1,60 @@
+<?link rel="stylesheet" type="text/css" href="/resources/css/form.css"?>
 <zk>
-    <window  viewModel="@id('vm') @init('com.example.zktraining.controller.FormController')" closable="true" title="Add Car" action="show: slideDown;hide: slideUp">
+    <window style="width: 50%" viewModel="@id('vm') @init('com.example.zktraining.controller.FormController')"
+            title="@load(vm.title)" closable="true"  validationMessages="@id('vmsgs')"
+            position="center,center" action="show: slideDown;hide: slideUp" form=" @id('fx')  @load(vm.carDTO) @save(vm.carDTO, before='saveCar') @validator('com.example.zktraining.util.ValidForm')   ">
         <grid >
             <rows>
 
                 <row>
                     <label value="Hãng xe"/>
-                    <combobox model="@load(vm.companys)" value="@bind(vm.carDTO.company) @save(vm.carDTO.company,after='saveCar')" >
+                    <combobox constraint="no empty"  model="@load(vm.companys)" value="@bind(vm.carDTO.company) @save(vm.carDTO.company,after='saveCar')" >
                         <comboitem label="@load(each)"  />
                     </combobox>
                 </row>
                 <row>
                     <label value="Tên xe"/>
-                    <textbox value="@load(vm.carDTO.name) @save(vm.carDTO.name, after='saveCar')" ></textbox>
+                    <textbox value="@bind(fx.name)" ></textbox>
+                    <label style="color:red;"
+                           value="@load(vmsgs['name'])" />
                 </row>
                 <row>
                     <label value="Loại xe"/>
-                    <combobox model="@load(vm.categorys)"   value="@bind(vm.carDTO.category) @save(vm.carDTO.category,after='saveCar')">
+                    <combobox constraint="no empty"  model="@bind(vm.categorys)"   value="@bind(vm.carDTO.category) @save(vm.carDTO.category,after='saveCar')">
                         <comboitem label="@load(each)" />
                     </combobox>
                 </row>
                 <row>
                     <label value="Giá bán"/>
-                    <decimalbox value="@bind(vm.carDTO.price) @save(vm.carDTO.price,after='saveCar')"/>
+                    <decimalbox constraint="no empty"  value="@bind(vm.carDTO.price) @save(vm.carDTO.price,after='saveCar')"/>
                 </row>
                 <row>
                     <label value="Phân khối"/>
-                    <textbox value="@bind(vm.carDTO.cubic) @save(vm.carDTO.cubic,after='saveCar')" ></textbox>
+                    <textbox  value="@bind(fx.cubic) @save(vm.carDTO.cubic,after='saveCar')" ></textbox>
                 </row>
                 <row>
                     <label value="Nơi sản xuất"/>
-                    <combobox model="@load(vm.whereProductions)"  value="@bind(vm.carDTO.whereProduction) @save(vm.carDTO.whereProduction,after='saveCar')"   >
+                    <combobox constraint="no empty"  model="@bind(vm.whereProductions)"  value="@bind(vm.carDTO.whereProduction) @save(vm.carDTO.whereProduction,after='saveCar')"   >
                         <comboitem label="@load(each)" value="value1" />
                     </combobox>
                 </row>
                 <row>
                     <label value="Màu sắc"/>
-                    <textbox value="@bind(vm.carDTO.color) @save(vm.carDTO.color,after='saveCar')"></textbox>
+                    <textbox constraint="no empty"  value="@bind(vm.carDTO.color) @save(vm.carDTO.color,after='saveCar')"></textbox>
                 </row>
                 <row>
                     <label value="Tình trạng còn hàng"/>
-                    <textbox value="@bind(vm.carDTO.status) @save(vm.carDTO.status,after='saveCar')" ></textbox>
+                    <textbox constraint="no empty"  value="@bind(vm.carDTO.status) @save(vm.carDTO.status,after='saveCar')"></textbox>
                 </row>
                 <row>
-                    <button onClick="@command('saveCar')" label="save"/>
-                    <button onClick="@command('closeForm')" label="cancel"/>
+                    <button onClick="@command('saveCar')" label="save" tooltip="save"/>
+                    <button onClick="@command('closeForm')" label="cancel" tooltiptext="Back"/>
                 </row>
 
             </rows>
 
 
         </grid>
-
-
-
-
 
 
     </window>

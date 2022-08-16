@@ -1,0 +1,50 @@
+<zk>
+    <window style="width: 40%" viewModel="@id('vm') @init('com.example.zktraining.controller.FormController')" title="Detail Car" closable="true"  position="center,center" action="show: slideDown;hide: slideUp" >
+        <grid >
+            <rows>
+
+                <row>
+                    <label value="Hãng xe"/>
+                    <label value="@load(vm.carDTO.company)"/>
+                </row>
+                <row>
+                    <label value="Tên xe"/>
+                    <label value="@load(vm.carDTO.name)"/>
+                </row>
+                <row>
+                    <label value="Loại xe"/>
+                    <label value="@load(vm.carDTO.category)"/>
+                </row>
+                <row>
+                    <label value="Giá bán"/>
+                    <label value="@load(vm.carDTO.price)"/>
+                </row>
+                <row>
+                    <label value="Phân khối"/>
+                    <label value="@load(vm.carDTO.cubic)"/>
+                </row>
+                <row>
+                    <label value="Nơi sản xuất"/>
+                    <label value="@load(vm.carDTO.whereProduction)"/>
+                </row>
+                <row>
+                    <label value="Màu sắc"/>
+                   <label value="@load(vm.carDTO.color)"/>
+                </row>
+                <row>
+                    <label value="Tình trạng còn hàng"/>
+                    <label value="@load(vm.carDTO.status)"/>
+                </row>
+
+            </rows>
+
+
+        </grid>
+
+
+
+
+
+
+    </window>
+</zk>

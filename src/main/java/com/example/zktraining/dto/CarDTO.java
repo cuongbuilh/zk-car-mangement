@@ -17,4 +17,5 @@ public class CarDTO {
     private String whereProduction;
     private String color;
     private String status;
+    private boolean checked;
 }

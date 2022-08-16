@@ -8,5 +8,5 @@ import java.util.List;
 public interface CarService {
     List<CarDTO> getListCar();
     CarDTO addCar(CarDTO carDTO);
-    void deleteCar(Integer id);
+    void deleteCar(List<Integer> id);
 }
