@@ -17,7 +17,7 @@
     <window viewModel="@id('vm') @init('com.example.zktraining.controller.CarController')">
         <style src="resource/css/car-management.css"/>
         <hlayout>
-            <listbox hflex="1" model="@load(vm.cars)" mold="paging"  pageSize="@bind(vm.pageSize)" >
+            <listbox hflex="1" model="@load(vm.cars)" mold="paging" pageSize="@bind(vm.pageSize)" >
                 <auxhead>
                     <auxheader colspan="8" class="topic">
                         <span>Car Management</span>

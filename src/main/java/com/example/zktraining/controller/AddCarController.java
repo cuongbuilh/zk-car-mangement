@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Executions;
@@ -89,11 +90,11 @@ public class AddCarController {
 
 
     @Command
-    public void createCar() {
+    public void createCar(@BindingParam("window") Window x) {
         log.info("createCar {}", car);
         if (carService.addCar(car)) {
             Toast.show("car was created", "info", null, 0, true);
-
+            x.detach();
         } else {
             log.error("createCar error");
             Toast.show("error, try again!", "error", null, 0, true);

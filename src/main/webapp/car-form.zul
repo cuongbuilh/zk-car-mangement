@@ -74,6 +74,6 @@
             </rows>
 
         </grid>
-        <button onClick="@command('createCar')" sclass="btn btn-success" label="@bind(vm.title)" width="100%"/>
+        <button onClick="@command('createCar', window=modalDialog)" sclass="btn btn-success" label="@bind(vm.title)" width="100%"/>
     </window>
 </zk>

@@ -73,6 +73,7 @@ public class CarController {
     }
 
     @Command
+    @NotifyChange("cars")
     public void deleteAll() {
         List<Integer> deletedIds = getCars().stream()
                 .filter(CarDTO::isChecked)
@@ -82,17 +83,15 @@ public class CarController {
         Messagebox.show("Do you want to delete ids: " + deletedIds, "", Messagebox.OK | Messagebox.NO, Messagebox.EXCLAMATION, new EventListener<Event>() {
             @Override
             public void onEvent(final Event event) throws Exception {
-                if (Messagebox.ON_YES.equals(event.getName())) {
+                if (Messagebox.ON_OK.equals(event.getName())) {
                     if (carService.deleteCars(deletedIds)) {
                         page = carService.search(carSearchDTO);
-                        BindUtils.postNotifyChange(null, null, this, "cars");
                     } else {
                         log.error("delete faild");
                     }
                 }
             }
         });
-
 
     }
 
@@ -101,7 +100,7 @@ public class CarController {
         Messagebox.show("Do you want to delete id: " + id, "", Messagebox.OK | Messagebox.NO, Messagebox.EXCLAMATION, new EventListener<Event>() {
             @Override
             public void onEvent(final Event event) throws Exception {
-                if (Messagebox.ON_YES.equals(event.getName())) {
+                if (Messagebox.ON_OK.equals(event.getName())) {
                     if (carService.deleteCars(Arrays.asList(id))) {
                         page = carService.search(carSearchDTO);
                         BindUtils.postNotifyChange(null, null, this, "cars");
@@ -124,7 +123,7 @@ public class CarController {
 
     @GlobalCommand
     @NotifyChange("cars")
-    public void search(@BindingParam("search") CarSearchDTO searchDTO){
+    public void search(@BindingParam("search") CarSearchDTO searchDTO) {
         page = carService.search(searchDTO);
     }
 
@@ -154,7 +153,7 @@ public class CarController {
     public void init() {
         carSearchDTO = new CarSearchDTO();
         page = carService.search(carSearchDTO);
-        pageSize = 2;
+        pageSize = 5;
 
         sizeList.add(1);
         sizeList.add(2);
@@ -179,7 +178,7 @@ public class CarController {
 
     @Command
     @NotifyChange("cars")
-    public void clear(){
+    public void clear() {
         carSearchDTO = new CarSearchDTO();
         page = carService.search(carSearchDTO);
     }
